@@ -19,8 +19,8 @@ import Van from './pages/Van';
 function App() {
   return (
     <ThemeProvider>
+     <CartProvider>
       <AuthProvider>
-        <CartProvider>
           <Router>
             <div className="min-h-screen transition-colors duration-300 dark:bg-gray-950">
               <Navbar />
@@ -45,8 +45,8 @@ function App() {
               </Routes>
             </div>
           </Router>
-        </CartProvider>
       </AuthProvider>
+      </CartProvider>
     </ThemeProvider>
   );
 }

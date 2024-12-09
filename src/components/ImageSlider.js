@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 function ImageSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -7,19 +8,25 @@ function ImageSlider() {
 
   const slides = [
     {
-      image: '/placeholder.jpg',
+      image: '/slider/1.jpeg',
       title: 'Specialty Coffee Roasted in Berlin',
       subtitle: 'Small-batch roasted coffee, carefully sourced and expertly prepared',
       action: { label: 'Shop Now', link: '/shop' }
     },
     {
-      image: '/placeholder.jpg',
+      image: '/slider/2.jpeg',
       title: 'Find Our Coffee Van',
       subtitle: 'Serving fresh coffee across Berlin daily',
       action: { label: 'Locations', link: '/van' }
     },
     {
-      image: '/placeholder.jpg',
+      image: '/slider/3.jpeg',
+      title: 'Fresh Roasts Weekly',
+      subtitle: 'Subscribe for regular deliveries of freshly roasted coffee',
+      action: { label: 'Subscribe', link: '/subscribe' }
+    },
+    {
+      image: '/slider/4.jpeg',
       title: 'Fresh Roasts Weekly',
       subtitle: 'Subscribe for regular deliveries of freshly roasted coffee',
       action: { label: 'Subscribe', link: '/subscribe' }
@@ -75,12 +82,12 @@ function ImageSlider() {
                 <p className="text-xl md:text-2xl mb-8 opacity-90 animate-slide-up">
                   {slide.subtitle}
                 </p>
-                <a
-                  href={slide.action.link}
+                <Link
+                  to={slide.action.link}
                   className="inline-block px-8 py-3 border-2 border-white hover:bg-white hover:text-black transition-colors duration-300 text-sm tracking-wider uppercase animate-fade-in"
                 >
                   {slide.action.label}
-                </a>
+                </Link>
               </div>
             </div>
           </div>

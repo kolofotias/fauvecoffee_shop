@@ -2,9 +2,9 @@ import React, { createContext, useContext, useReducer } from 'react';
 
 const CartContext = createContext();
 
-function cartReducer(state, action) {
+const cartReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_ITEM':
+    case 'ADD_ITEM': {
       const existingItem = state.items.find(item => item.id === action.payload.id);
       
       if (existingItem) {
@@ -24,18 +24,20 @@ function cartReducer(state, action) {
         items: [...state.items, { ...action.payload, quantity: 1 }],
         total: state.total + action.payload.price
       };
-      
-    case 'REMOVE_ITEM':
+    }
+    
+    case 'REMOVE_ITEM': {
       const item = state.items.find(item => item.id === action.payload);
       return {
         ...state,
         items: state.items.filter(item => item.id !== action.payload),
         total: state.total - (item.price * item.quantity)
       };
-      
-    case 'UPDATE_QUANTITY':
-      const targetItem = state.items.find(item => item.id === action.payload.id);
-      const quantityDiff = action.payload.quantity - targetItem.quantity;
+    }
+    
+    case 'UPDATE_QUANTITY': {
+      const item = state.items.find(item => item.id === action.payload.id);
+      const quantityDiff = action.payload.quantity - item.quantity;
       
       return {
         ...state,
@@ -44,16 +46,26 @@ function cartReducer(state, action) {
             ? { ...item, quantity: action.payload.quantity }
             : item
         ),
-        total: state.total + (targetItem.price * quantityDiff)
+        total: state.total + (item.price * quantityDiff)
+      };
+    }
+    
+    case 'CLEAR_CART':
+      return {
+        items: [],
+        total: 0
       };
       
     default:
       return state;
   }
-}
+};
 
 export function CartProvider({ children }) {
-  const [state, dispatch] = useReducer(cartReducer, { items: [], total: 0 });
+  const [state, dispatch] = useReducer(cartReducer, {
+    items: [],
+    total: 0
+  });
 
   return (
     <CartContext.Provider value={{ state, dispatch }}>
@@ -63,5 +75,9 @@ export function CartProvider({ children }) {
 }
 
 export function useCart() {
-  return useContext(CartContext);
+  const context = useContext(CartContext);
+  if (context === undefined) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
 }

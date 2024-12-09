@@ -19,6 +19,12 @@ function Product() {
   const [product, setProduct] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
+  const handleAddToCart = () => {
+    dispatch({ 
+      type: 'ADD_ITEM', 
+      payload: product 
+    });
+  };
 
   useEffect(() => {
     fetchProduct();
@@ -157,7 +163,8 @@ function Product() {
                 </div>
 
                 <button 
-                  onClick={() => dispatch({ type: 'ADD_ITEM', payload: product })}
+                      onClick={handleAddToCart}
+                      //onClick={() => dispatch({ type: 'ADD_ITEM', payload: product })}
                   className={`w-full py-3 ${
                     isDark ? 'bg-white text-black' : 'bg-black text-white'
                   } hover:opacity-90 transition-opacity text-sm tracking-wider uppercase`}

@@ -39,6 +39,20 @@ function Shop() {
     );
   }
 
+  const handleAddToCart = (product) => {
+    dispatch({ 
+      type: 'ADD_ITEM', 
+      payload: product 
+    });
+
+    // Optional: Add a visual feedback
+    // You could add a toast notification here
+  };
+
+  if (loading) {
+    return <div className="pt-32 pb-24 px-4 text-center">Loading...</div>;
+  }
+
   return (
     <div className="pt-32 pb-24 px-4">
       <div className="max-w-7xl mx-auto">
@@ -67,7 +81,7 @@ function Shop() {
               </Link>
               
               <button 
-                onClick={() => dispatch({ type: 'ADD_ITEM', payload: product })}
+                onClick={() => handleAddToCart(product)}
                 disabled={!product.inStock}
                 className={`w-full py-2 ${
                   isDark ? 'bg-white text-black' : 'bg-black text-white'
