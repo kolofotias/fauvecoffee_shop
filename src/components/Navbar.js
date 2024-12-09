@@ -18,7 +18,7 @@ function Navbar() {
     // Add admin link conditionally
     ...(isAdmin ? [{ href: '/admin', label: 'Dashboard' }] : []),
     // Add login link if not admin
-    ...(!isAdmin ? [{ href: '/admin/login', label: 'Admin Login' }] : [])
+    ...(!isAdmin ? [{ href: '/admin/login', label: 'Admin' }] : [])
   ];
 
   return (
