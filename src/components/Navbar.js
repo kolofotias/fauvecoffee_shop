@@ -28,7 +28,7 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-2">
-            <Coffee className="h-6 w-6" />
+            {/* <Coffee className="h-6 w-6" /> */}
             <span className="text-lg tracking-widest uppercase">Fauve</span>
           </Link>
 

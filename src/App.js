@@ -6,11 +6,14 @@ import Shop from './pages/Shop';
 import Product from './pages/Product';
 import Contact from './pages/Contact';
 import AdminLogin from './pages/AdminLogin';
+import Checkout from './pages/Checkout';
+import CheckoutSuccess from './pages/CheckoutSuccess';
 import AdminDashboard from './pages/admin/Dashboard';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import Van from './pages/Van';
 
 
 function App() {
@@ -24,6 +27,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/van" element={<Van />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/product/:id" element={<Product />} />
                 <Route path="/contact" element={<Contact />} />
