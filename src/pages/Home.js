@@ -3,6 +3,7 @@ import React from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { Coffee, Truck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import InstagramFeed from '../components/InstagramFeed';
 
 function Home() {
   const { theme } = useTheme();
@@ -29,6 +30,7 @@ function Home() {
           </Link>
         </div>
       </div>
+      <InstagramFeed />
 
       {/* Featured Sections */}
       <div className="max-w-7xl mx-auto px-4 py-24">
