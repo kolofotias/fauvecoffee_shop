@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -7,11 +6,11 @@ import Shop from './pages/Shop';
 import Product from './pages/Product';
 import Contact from './pages/Contact';
 import AdminLogin from './pages/AdminLogin';
-import { ThemeProvider } from './context/ThemeContext';
-import { CartProvider } from './context/CartContext';
-import { AuthProvider } from './context/AuthContext';
-import { ProtectedRoute } from './components/ProtectedRoute';
 import AdminDashboard from './pages/admin/Dashboard';
+import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
   return (

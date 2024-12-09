@@ -1,20 +1,24 @@
-// src/components/Navbar.js
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Coffee, Sun, Moon, Menu, X } from 'lucide-react';
+import { Coffee, ShoppingCart, Sun, Moon, Menu } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
-import { ShoppingCart } from './ShoppingCart';
+import { useAuth } from '../context/AuthContext';
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { isAdmin } = useAuth();
   const location = useLocation();
   const isDark = theme === 'dark';
 
   const navLinks = [
     { href: '/shop', label: 'Shop' },
     { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' }
+    { href: '/contact', label: 'Contact' },
+    // Add admin link conditionally
+    ...(isAdmin ? [{ href: '/admin', label: 'Dashboard' }] : []),
+    // Add login link if not admin
+    ...(!isAdmin ? [{ href: '/admin/login', label: 'Admin Login' }] : [])
   ];
 
   return (
@@ -23,7 +27,6 @@ function Navbar() {
     } border-b`}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <Coffee className="h-6 w-6" />
             <span className="text-lg tracking-widest uppercase">Fauve</span>
@@ -48,17 +51,20 @@ function Navbar() {
             >
               {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
-            <ShoppingCart />
+            <ShoppingCart className="h-5 w-5 cursor-pointer hover:opacity-70" />
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-4">
-            <ShoppingCart />
+            <ShoppingCart className="h-5 w-5" />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="hover:opacity-70 transition-opacity"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? 
+                <Menu className="h-6 w-6" /> : 
+                <Menu className="h-6 w-6" />
+              }
             </button>
           </div>
         </div>

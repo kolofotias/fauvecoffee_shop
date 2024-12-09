@@ -65,78 +65,48 @@ function Shop() {
     ? products 
     : products.filter(product => product.category === activeFilter);
 
-  return (
-    <div className="pt-32 pb-24 px-4 animate-fade-in dark:text-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-12">
-          <h1 className="text-4xl font-light">Shop</h1>
-          <button 
-            onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center space-x-2 opacity-70 hover:opacity-100 transition-opacity md:hidden"
-          >
-            <Filter className="h-5 w-5" />
-            <span>Filter</span>
-          </button>
-        </div>
-
-        {/* Filters */}
-        <div className={`
-          md:flex space-x-8 mb-8 
-          ${showFilters ? 'block' : 'hidden md:flex'}
-        `}>
-          {filters.map(filter => (
-            <button
-              key={filter.value}
-              onClick={() => setActiveFilter(filter.value)}
-              className={`${
-                activeFilter === filter.value 
-                  ? 'opacity-100' 
-                  : 'opacity-70 hover:opacity-100'
-              } transition-opacity`}
-            >
-              {filter.label}
-            </button>
-          ))}
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map(product => (
-            <div 
-              key={product.id} 
-              className={`${isDark ? 'bg-gray-900' : 'bg-gray-50'} p-6 animate-slide-up`}
-            >
-              <Link to={`/product/${product.id}`} className="block mb-4">
-                <img 
-                  src={product.images[0]} 
-                  alt={product.name}
-                  className="w-full aspect-square object-cover mb-6 hover:opacity-90 transition-opacity"
-                />
-                <h3 className="text-xl font-light mb-2">{product.name}</h3>
-              </Link>
-              <p className="opacity-70 mb-4">{product.description}</p>
-              <div className="flex justify-between items-center mb-6">
-                <p>€{product.price.toFixed(2)}</p>
-                <span className={`text-sm ${
-                  product.inStock ? 'text-green-600' : 'text-red-500'
-                }`}>
-                  {product.inStock ? 'In Stock' : 'Out of Stock'}
-                </span>
-              </div>
-              <button 
-                onClick={() => dispatch({ type: 'ADD_ITEM', payload: product })}
-                disabled={!product.inStock}
-                className={`w-full py-2 ${
-                  isDark ? 'bg-white text-black' : 'bg-black text-white'
-                } hover:opacity-90 transition-opacity text-sm tracking-wider uppercase disabled:opacity-50`}
+    return (
+      <div className="pt-32 pb-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-4xl font-light mb-12">Shop</h1>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map(product => (
+              <div 
+                key={product.id} 
+                className={`${isDark ? 'bg-gray-900' : 'bg-gray-50'} p-6`}
               >
-                {product.inStock ? 'Add to Cart' : 'Out of Stock'}
-              </button>
-            </div>
-          ))}
+                <Link 
+                  to={`/product/${product.id}`}
+                  className="block group"
+                >
+                  <div className="mb-4 overflow-hidden">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full aspect-square object-cover transition-transform group-hover:scale-105"
+                    />
+                  </div>
+                  <h3 className="text-xl font-light mb-2">{product.name}</h3>
+                  <p className="opacity-70 mb-4">{product.description}</p>
+                  <p className="mb-4">€{product.price.toFixed(2)}</p>
+                </Link>
+                
+                <button 
+                  onClick={() => dispatch({ type: 'ADD_ITEM', payload: product })}
+                  disabled={!product.inStock}
+                  className={`w-full py-2 ${
+                    isDark ? 'bg-white text-black' : 'bg-black text-white'
+                  } hover:opacity-90 transition-opacity text-sm tracking-wider uppercase disabled:opacity-50`}
+                >
+                  {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-export default Shop;
+    );
+  }
+  
+  export default Shop;
