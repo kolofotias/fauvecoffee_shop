@@ -12,6 +12,7 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
+
 function App() {
   return (
     <ThemeProvider>
